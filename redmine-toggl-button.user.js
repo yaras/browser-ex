@@ -38,7 +38,7 @@ function changeButton() {
 }
 
 function stopEntry() {
-  
+
 }
 
 function notify(msg) {
@@ -68,13 +68,13 @@ function notify(msg) {
 
 function startEntry() {
   var url =  toggl_api + 'time_entries/start';
-  
+
   var now = new Date(); //without params it defaults to "now"
   var start_time = now.toJSON();
-    
+
   var project = $('.current-project').text();
 
-  var start_request = 
+  var start_request =
     {
       "time_entry":
       {
@@ -86,12 +86,12 @@ function startEntry() {
         "pid": projects[project]
       }
     };
-  
+
   console.log('RedmineTogglButton: startEntry:');
   console.log(start_request);
-  
+
   var basic_auth = "Basic " + btoa(toggl_api_key + ":" + "api_token");
-  
+
   GM_xmlhttpRequest({
     method: "POST",
     url: url,
@@ -113,31 +113,31 @@ function startEntry() {
       }
     }
   });
-  
+
   console.log('RedmineTogglButton: POST ' + url + ' sent...');
 }
 
 function initButton() {
   console.log('RedmineTogglButton: initButton');
-  
+
   var text = window.location;
   var idRegex = /\/issues\/(\d+)/i;
   var id = idRegex.exec(text)[1];
   console.log("RedmineTogglButton: Task id parsed: " + id);
-  
+
   var button_style='background-image: url(http://blog.toggl.com/wp-content/uploads/2015/04/toggl-button-light.png);background-size: 21px 21px;background-repeat: no-repeat;';
-  
+
   var init_value = '#' + id;
   $('#content .contextual:first').prepend('<input type="text" id="' + start_input_id + '" value="' + init_value + '" />');
   $('#content .contextual:first').prepend('<a class="icon" style="' + button_style + '" href="#" id="' + start_button_id + '">Start</a>&nbsp;');
-  
-  $('#' + start_button_id).click(startEntry);  
+
+  $('#' + start_button_id).click(startEntry);
   $('#' + start_input_id).keypress(function(event){
     var keycode = event.keyCode || event.which;
     if(keycode == '13') {
-       startEntry(); 
+       startEntry();
     }
-  }); 
+  });
 }
 
 $(function() {
@@ -148,4 +148,4 @@ $(function() {
   catch (err) {
       console.error(err);
   }
-}); 
+});
