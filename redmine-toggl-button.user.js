@@ -19,7 +19,7 @@ console.log('RedmineTogglButton: init');
 // https://www.toggl.com/api/v8/me
 var toggl_api_key = 'x'; // DO UZUPEŁNIENIA
 var toggl_workspace_id = 1; // DO UZUPEŁNIENIA
-var toggl_api = 'https://www.toggl.com/api/v8/'
+var toggl_api = 'https://www.toggl.com/api/v8/';
 
 var start_button_id='toggl-start';
 var start_input_id='toggl-comment';
