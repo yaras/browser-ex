@@ -105,11 +105,16 @@ function startEntry() {
     onload: function(response) {
       console.log('RedmineTogglButton: POST ' + url + ' response');
       console.log(response);
-      try {
-          notify("Wysłano do toggl");
-      }
-      catch (err) {
-        console.log('RedmineTogglButton: POST ' + url + ' error ' + err.message);
+
+      if (response.status != 200) {
+          notify("Error: " + response.statusText);
+      } else {
+          try {
+              notify("Wysłano do toggl");
+          }
+          catch (err) {
+              console.log('RedmineTogglButton: POST ' + url + ' error ' + err.message);
+          }
       }
     }
   });
